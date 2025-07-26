@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "San pham A",
+    "price": 100
+  },
+  {
+    "id": 2,
+    "name": "San pham B cap nhat",
+    "price": 300
+  },
+  {
+    "name": "San pham D",
+    "price": 250,
+    "id": 4
+  },
+  {
+    "name": "San pham F",
+    "price": 160,
+    "id": 5
+  }
+]
