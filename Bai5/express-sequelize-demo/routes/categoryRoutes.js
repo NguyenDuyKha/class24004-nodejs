@@ -6,7 +6,7 @@ router.get('/', async(req, res, next) => {
     try {
         const categories = await Category.findAll({
             include: [{
-                model: Product, // Model cần include Product)
+                model: Product, // Model cần include (Product)
                 as: 'products'  // Alias đã define trong Category.hasMany (optional)
             }]
         });

@@ -1,10 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const { Product, Category, Tag } = require('../models'); // Import model Product
+const { Product, Category, Tag, Sequelize } = require('../models'); // Import model Product
 // GET all products
 router.get('/', async (req, res, next) => {
+    const pageNumber = req.query.page;
+    const pageSize = 2;
+    const offset = (pageNumber - 1) * pageSize;
+
     try {
         const products = await Product.findAll({
+            limit: pageSize,
+            offset: offset,
+            // where: {
+            //     price: {
+            //         [ Sequelize.Op.gt ]: 1000,
+            //     },
+            //     name: {
+            //         [ Sequelize.Op.like ]: '%Laptop%'
+            //     },
+            //     categoryId: {
+            //         [ Sequelize.Op.in ]: [2]
+            //     }
+            // },
+            // order: [
+            //     // ['price', 'DESC'],
+            //     ['categoryId', 'ASC'],
+            //     ['name', 'ASC']
+            // ],
             include: [
                 {
                     model: Category,
