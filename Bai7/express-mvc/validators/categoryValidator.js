@@ -1,4 +1,4 @@
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 
 const commonIdParamValidation = () => [
     param('id').isInt({ min: 1 }).withMessage('ID danh muc la so nguyen duong')

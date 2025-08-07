@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
 });
 // GET product by ID
 router.get('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     handleValidationErrors,
     async (req, res, next) => {
     try {
@@ -46,7 +46,7 @@ router.get('/:id',
 });
 // POST create new product
 router.post('/',
-    createProductValidationRules,
+    createProductValidationRules(),
     handleValidationErrors,
     async (req, res, next) => {
     try {
@@ -58,7 +58,7 @@ router.post('/',
 });
 // PUT update product
 router.put('/:id',
-    updateProductValidationRules,
+    updateProductValidationRules(),
     async (req, res, next) => {
     try {
         const productId = req.params.id;
@@ -76,7 +76,7 @@ router.put('/:id',
 });
 // DELETE product
 router.delete('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     async (req, res, next) => {
     try {
         const productId = req.params.id;

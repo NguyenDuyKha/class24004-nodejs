@@ -20,7 +20,7 @@ router.get('/', async(req, res, next) => {
 });
 // GET category by ID
 router.get('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     async (req, res, next) => {
     try {
         const category = await Category.findByPk(req.params.id);
@@ -34,7 +34,7 @@ router.get('/:id',
 });
 // POST create new category
 router.post('/',
-    createCategoryValidationRules,
+    createCategoryValidationRules(),
     handleValidationErrors,
     async (req, res, next) => {
         try {
@@ -55,7 +55,7 @@ router.post('/',
 });
 // PUT update category
 router.put('/:id',
-    updateCategoryValidationRules,
+    updateCategoryValidationRules(),
     handleValidationErrors,
     async (req, res, next) => {
     try {
@@ -73,7 +73,7 @@ router.put('/:id',
 });
 // DELETE category
 router.delete('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     async (req, res, next) => {
     try {
         const deletedRows = await Category.destroy({

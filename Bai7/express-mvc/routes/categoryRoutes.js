@@ -8,20 +8,20 @@ const { getAllCategories, getCategoryById, updateCategory, createCategory, delet
 router.get('/', getAllCategories);
 // GET category by ID
 router.get('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     getCategoryById);
 // POST create new category
 router.post('/',
-    createCategoryValidationRules,
+    createCategoryValidationRules(),
     handleValidationErrors,
     createCategory);
 // PUT update category
 router.put('/:id',
-    updateCategoryValidationRules,
+    updateCategoryValidationRules(),
     handleValidationErrors,
     updateCategory);
 // DELETE category
 router.delete('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     deleteCategory);
 module.exports = router;

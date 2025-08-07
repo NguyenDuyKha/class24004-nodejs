@@ -8,20 +8,20 @@ const { getAllProducts, getProductById, createProduct, updateProduct, deleteProd
 router.get('/', getAllProducts);
 // GET product by ID
 router.get('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     handleValidationErrors,
     getProductById);
 // POST create new product
 router.post('/',
-    createProductValidationRules,
+    createProductValidationRules(),
     handleValidationErrors,
     createProduct);
 // PUT update product
 router.put('/:id',
-    updateProductValidationRules,
+    updateProductValidationRules(),
     updateProduct);
 // DELETE product
 router.delete('/:id',
-    commonIdParamValidation,
+    commonIdParamValidation(),
     deleteProduct);
 module.exports = router;
