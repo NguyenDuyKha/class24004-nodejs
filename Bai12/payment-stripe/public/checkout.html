@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Demo</title>
+</head>
+<body>
+    <form id="payment-form">
+        <div id="card-element"></div>
+        <button type="submit" id="submit-btn">Pay</button>
+        <div role="alert" id="payment-message"></div>
+    </form>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripe = Stripe('pk_test_51Ny7xyK3Pud6VeJGvQE29GrWcc7tjwgLzQO81GActX6kvu9Rxq7tyLUGYNcrumxU1muqlzIGagUoSwALglhQ6u9k00WIk9vAGh');
+
+        let elements;
+        let clientSecret;
+
+        async function initialize() {
+            const response = await fetch('/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(
+                    {
+                        items: [
+                            {
+                                id: 't-shirt'
+                            },
+                            {
+                                id: 'sneaker'
+                            },
+                        ],
+                        currency: 'usd'
+                    }
+                ),
+            });
+
+            const data = await response.json();
+            clientSecret = data.clientSecret;
+
+            elements = stripe.elements({ clientSecret });
+            const cardElement = elements.create('card');
+            cardElement.mount("#card-element");
+        }
+
+        initialize();
+    </script>
+</body>
+</html>
