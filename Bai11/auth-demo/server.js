@@ -4,12 +4,14 @@ dotenv.config();
 const express = require('express');
 const app = express();
 
+const sessionRoutes = require('./routes/sessionRoutes');
+const authRoutes = require('./routes/authRoutes');
+
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MySQLStore = require('express-mysql-session')(session);
 
 const config = require('./config/config.js');
-const { message } = require('statuses');
 
 const PORT = process.env.PORT || 3000;
 
@@ -79,31 +81,8 @@ app.get('/clear-cookie', (req, res) => {
     res.json({ message: "Clear cookies"});
 })
 
-app.get('/set', (req, res) => {
-    req.session.views = (req.session.views || 0) + 1;
-    req.session.userData = { name: "Alice", role: "user" };
-    req.session.message = "Hello Session !";
-
-    res.json({ message: `Session data set. Views: ${req.session.views}`});
-});
-
-app.get('/get', (req, res) => {
-    if(req.session.views) {
-        console.log(req.session);
-        res.json({ message: "Get Session" });
-    } else {
-        res.json({ message: "No session data. Try /set first."})
-    }
-});
-
-app.get('/update', (req, res) => {
-    if(req.session.userData) {
-        req.session.userData.lastSeen = new Date();
-        res.json({ message: "Session data update !"})
-    } else {
-        res.json({ message: "No session data. Try /set first."})
-    }
-})
+app.use('/api/session', sessionRoutes);
+app.use('/api/auth', authRoutes);
 
 
 app.listen(PORT, () => {
