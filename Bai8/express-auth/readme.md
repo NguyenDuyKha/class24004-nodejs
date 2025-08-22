@@ -8,10 +8,13 @@ npm install dotenv
 ```sh
 DB_DIALECT=mysql
 DB_DATABASE=sequelize_demo_dev
-DB_USERNAME=your_mysql_username  # Thay bằng username MySQL của bạn
-DB_PASSWORD=your_mysql_password  # Thay bằng password MySQL của bạn (nếu có)
+DB_USERNAME=root
+DB_PASSWORD=root
 DB_HOST=127.0.0.1
 DB_PORT=3306
+
+JWT_SECRET=your_super_secret_and_long_random_string_here
+JWT_EXPIRES_IN=1h
 ```
 
 
