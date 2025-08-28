@@ -48,6 +48,42 @@
         }
 
         initialize();
+
+        const form = document.getElementById("payment-form");
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            setLoading(true);
+
+            const { error, paymentIntent } = await stripe.confirmCardPayment(
+                clientSecret,
+                {
+                    payment_method: {
+                        card: elements.getElement('card'),
+                        billing_details: {
+                            name: "Kha Nguyen",
+                        }
+                    }
+                }
+            )
+
+            if (error) {
+                showMessage(`Payment failed: ${error.message}`);
+            } else {
+                showMessage(`Payment: ${paymentIntent.status}`);
+            }
+
+            setLoading(false);
+        });
+
+        function showMessage(text) {
+            const messageContainer = document.querySelector("#payment-message");
+            messageContainer.textContent = text;
+        }
+
+        function setLoading(isLoading) {
+            const submitBtn = document.querySelector("#submit-btn");
+            submitBtn.disabled = isLoading;
+        }
     </script>
 </body>
 </html>
